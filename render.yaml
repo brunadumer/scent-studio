@@ -1,0 +1,14 @@
+# Render Blueprint — one Node web service serving the API and the built React app.
+services:
+  - type: web
+    name: scent-studio
+    runtime: node
+    plan: free
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/products
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: SHOPIFY_WEBHOOK_SECRET
+        generateValue: true
